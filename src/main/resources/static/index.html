@@ -93,6 +93,12 @@
             <td>{{item.title}}</td>
             <td>{{item.quantity}}</td>
             <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td>
+                <p>
+                    <button class="btn btn-danger" ng-click="removeProductFromCart(item.productId)">Удалить</button>
+                    <button class="btn btn-primary" ng-click="decreaseProductFromCart(item.productId)">Уменьшить на один</button>
+                </p>
+            </td>
         </tr>
         <tr>
             <td></td>
