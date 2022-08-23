@@ -76,6 +76,20 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             });
     }
 
+    $scope.decreaseProductFromCart = function (productId) {
+        $http.put(contextPath + '/carts/' + productId, $localStorage.cartName)
+            .then(function (response) {
+                $scope.loadCart()
+            })
+    }
+
+    $scope.removeProductFromCart = function (productId) {
+        $http.delete(contextPath + '/carts/' + productId)
+            .then(function (response) {
+                $scope.loadCart()
+            })
+    }
+
     $rootScope.isUserLoggedIn = function () {
         if ($localStorage.springWebUser) {
             return true;

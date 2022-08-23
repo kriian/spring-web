@@ -39,4 +39,14 @@ public class CartService {
         cacheManager.getCache("Cart").put(cartName, cart);
     }
 
+    public void removeProductById(Long id) {
+        cart.removeProduct(id);
+    }
+
+    public void decreaseProductInCartById(Long id, String cartName) {
+        Cart cart = getCurrentCart(cartName);
+        cart.decreaseProduct(id);
+        cacheManager.getCache("Cart").put(cartName, cart);
+    }
+
 }
