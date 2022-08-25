@@ -19,3 +19,6 @@ spring:
           auto: update
   flyway:
     baseline-on-migrate: true
+other:
+  cache:
+    cart: "Cart"
