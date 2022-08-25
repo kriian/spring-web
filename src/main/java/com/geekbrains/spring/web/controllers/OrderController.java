@@ -24,9 +24,9 @@ public class OrderController {
     private final OrderService orderService;
     private final OrderConvertor orderConvertor;
 
-    @PostMapping
+    @PostMapping("/{cartName}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createOrder(Principal principal, @RequestBody OrderDetailsDto orderDetailsDto, String cartName) {
+    public void createOrder(Principal principal, @RequestBody OrderDetailsDto orderDetailsDto, @PathVariable String cartName) {
         User user = userService.findByUsername(principal.getName())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
         orderService.createOrder(user, orderDetailsDto, cartName);
