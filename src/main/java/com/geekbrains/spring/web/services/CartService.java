@@ -19,10 +19,10 @@ public class CartService {
     private final CacheManager cacheManager;
     private Cart cart;
 
-    @Value("${other.cache.cart}")
+    @Value("${spring.cache.user.name}")
     private String CACHE_CART;
 
-    @Cacheable(value = "${other.cache.cart}", key = "#cartName")
+    @Cacheable(value = "Cart", key = "#cartName")
     public Cart getCurrentCart(String cartName) {
         cart = cacheManager.getCache(CACHE_CART).get(cartName, Cart.class);
         if (!Optional.ofNullable(cart).isPresent()) {
@@ -32,7 +32,7 @@ public class CartService {
         return cart;
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart addProductByIdToCart(Long id, String cartName) {
         Cart cart = getCurrentCart(cartName);
         if (!cart.addProductCount(id)) {
@@ -43,7 +43,7 @@ public class CartService {
         return cart;
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart clear(String cartName) {
         Cart cart = getCurrentCart(cartName);
         cart.clear();
@@ -54,7 +54,7 @@ public class CartService {
         cart.removeProduct(id);
     }
 
-    @CachePut(value = "${other.cache.cart}", key = "#cartName")
+    @CachePut(value = "Cart", key = "#cartName")
     public Cart decreaseProductInCartById(Long id, String cartName) {
         Cart cart = getCurrentCart(cartName);
         cart.decreaseProduct(id);
