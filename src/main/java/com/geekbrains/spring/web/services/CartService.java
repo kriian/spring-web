@@ -50,8 +50,11 @@ public class CartService {
         return cart;
     }
 
-    public void removeProductById(Long id) {
+    @CachePut(value = "Cart", key = "#cartName")
+    public Cart removeProductById(Long id, String cartName) {
+        Cart cart = getCurrentCart(cartName);
         cart.removeProduct(id);
+        return cart;
     }
 
     @CachePut(value = "Cart", key = "#cartName")
