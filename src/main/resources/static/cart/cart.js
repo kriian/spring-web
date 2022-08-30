@@ -16,10 +16,13 @@ angular.module('market-front').controller('cartController', function ($scope, $r
     }
 
     $scope.removeProductFromCart = function (productId) {
-        $http.delete(contextPath + '/carts/' + productId)
-            .then(function (response) {
-                $scope.loadCart()
-            })
+        $http({
+            url: contextPath + '/carts/' + productId,
+            method: 'DELETE',
+            data: $localStorage.cartName
+        }).then(function (response) {
+            $scope.loadCart()
+        })
     }
 
     $scope.clearCart = function () {
@@ -33,7 +36,7 @@ angular.module('market-front').controller('cartController', function ($scope, $r
         $http({
             url: contextPath + '/orders/' + $localStorage.cartName,
             method: 'POST',
-            data: {orderDetailsDto: $scope.orderDetails}
+            data: $scope.orderDetails
         }).then(function (response) {
                 $scope.loadCart();
                 $scope.orderDetails = null

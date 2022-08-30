@@ -24,12 +24,12 @@ public class CartController {
 
     @PostMapping("/clear")
     public void clearCart(@RequestBody String cartName){
-        service.getCurrentCart(cartName).clear();
+        service.clear(cartName);
     }
 
     @DeleteMapping("/{id}")
-    public void removeProductFromCart(@PathVariable Long id) {
-        service.removeProductById(id);
+    public void removeProductFromCart(@PathVariable Long id, @RequestBody String cartName) {
+        service.removeProductById(id, cartName);
     }
 
     @PutMapping("/{id}")
