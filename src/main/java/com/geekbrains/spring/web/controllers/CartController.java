@@ -29,13 +29,11 @@ public class CartController {
 
     @DeleteMapping("/{id}")
     public void removeProductFromCart(@PathVariable Long id, @RequestBody String cartName) {
-        System.out.println(cartName);
         service.removeProductById(id, cartName);
     }
 
     @PutMapping("/{id}")
     public void decreaseProductInCart(@PathVariable Long id, @RequestBody String cartName){
-        System.out.println("decrease " + cartName);
         service.decreaseProductInCartById(id, cartName);
     }
 
